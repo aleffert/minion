@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		77356F431574363F0087C611 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F421574363F0087C611 /* UIKit.framework */; };
+		77356F451574363F0087C611 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F441574363F0087C611 /* Foundation.framework */; };
+		77356F471574363F0087C611 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F461574363F0087C611 /* CoreGraphics.framework */; };
+		77356F491574363F0087C611 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F481574363F0087C611 /* CoreData.framework */; };
+		77356F4F1574363F0087C611 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77356F4D1574363F0087C611 /* InfoPlist.strings */; };
+		77356F511574363F0087C611 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F501574363F0087C611 /* main.m */; };
+		77356F551574363F0087C611 /* ADLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F541574363F0087C611 /* ADLAppDelegate.m */; };
+		77356F581574363F0087C611 /* Minion.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77356F561574363F0087C611 /* Minion.xcdatamodeld */; };
+		77356F5B1574363F0087C611 /* ADLMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F5A1574363F0087C611 /* ADLMasterViewController.m */; };
+		77356F5E1574363F0087C611 /* ADLDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F5D1574363F0087C611 /* ADLDetailViewController.m */; };
+		77356F611574363F0087C611 /* ADLMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77356F5F1574363F0087C611 /* ADLMasterViewController.xib */; };
+		77356F641574363F0087C611 /* ADLDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77356F621574363F0087C611 /* ADLDetailViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		77356F3E1574363F0087C611 /* Minion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77356F421574363F0087C611 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		77356F441574363F0087C611 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		77356F461574363F0087C611 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		77356F481574363F0087C611 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		77356F4C1574363F0087C611 /* Minion-Info.plist */ = {isa = PBXFileReference; path = "Minion-Info.plist"; sourceTree = "<group>"; };
+		77356F4E1574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		77356F501574363F0087C611 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		77356F521574363F0087C611 /* Minion-Prefix.pch */ = {isa = PBXFileReference; path = "Minion-Prefix.pch"; sourceTree = "<group>"; };
+		77356F531574363F0087C611 /* ADLAppDelegate.h */ = {isa = PBXFileReference; path = ADLAppDelegate.h; sourceTree = "<group>"; };
+		77356F541574363F0087C611 /* ADLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLAppDelegate.m; sourceTree = "<group>"; };
+		77356F571574363F0087C611 /* Minion.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Minion.xcdatamodel; sourceTree = "<group>"; };
+		77356F591574363F0087C611 /* ADLMasterViewController.h */ = {isa = PBXFileReference; path = ADLMasterViewController.h; sourceTree = "<group>"; };
+		77356F5A1574363F0087C611 /* ADLMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLMasterViewController.m; sourceTree = "<group>"; };
+		77356F5C1574363F0087C611 /* ADLDetailViewController.h */ = {isa = PBXFileReference; path = ADLDetailViewController.h; sourceTree = "<group>"; };
+		77356F5D1574363F0087C611 /* ADLDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLDetailViewController.m; sourceTree = "<group>"; };
+		77356F601574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ADLMasterViewController.xib; sourceTree = "<group>"; };
+		77356F631574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ADLDetailViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		77356F3B1574363F0087C611 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77356F431574363F0087C611 /* UIKit.framework in Frameworks */,
+				77356F451574363F0087C611 /* Foundation.framework in Frameworks */,
+				77356F471574363F0087C611 /* CoreGraphics.framework in Frameworks */,
+				77356F491574363F0087C611 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		77356F331574363F0087C611 = {
+			isa = PBXGroup;
+			children = (
+				77356F4A1574363F0087C611 /* Minion */,
+				77356F411574363F0087C611 /* Frameworks */,
+				77356F3F1574363F0087C611 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		77356F3F1574363F0087C611 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				77356F3E1574363F0087C611 /* Minion.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		77356F411574363F0087C611 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77356F421574363F0087C611 /* UIKit.framework */,
+				77356F441574363F0087C611 /* Foundation.framework */,
+				77356F461574363F0087C611 /* CoreGraphics.framework */,
+				77356F481574363F0087C611 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77356F4A1574363F0087C611 /* Minion */ = {
+			isa = PBXGroup;
+			children = (
+				77356F531574363F0087C611 /* ADLAppDelegate.h */,
+				77356F541574363F0087C611 /* ADLAppDelegate.m */,
+				77356F591574363F0087C611 /* ADLMasterViewController.h */,
+				77356F5A1574363F0087C611 /* ADLMasterViewController.m */,
+				77356F5C1574363F0087C611 /* ADLDetailViewController.h */,
+				77356F5D1574363F0087C611 /* ADLDetailViewController.m */,
+				77356F5F1574363F0087C611 /* ADLMasterViewController.xib */,
+				77356F621574363F0087C611 /* ADLDetailViewController.xib */,
+				77356F561574363F0087C611 /* Minion.xcdatamodeld */,
+				77356F4B1574363F0087C611 /* Supporting Files */,
+			);
+			path = Minion;
+			sourceTree = "<group>";
+		};
+		77356F4B1574363F0087C611 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				77356F4C1574363F0087C611 /* Minion-Info.plist */,
+				77356F4D1574363F0087C611 /* InfoPlist.strings */,
+				77356F501574363F0087C611 /* main.m */,
+				77356F521574363F0087C611 /* Minion-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		77356F3D1574363F0087C611 /* Minion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77356F671574363F0087C611 /* Build configuration list for PBXNativeTarget "Minion" */;
+			buildPhases = (
+				77356F3A1574363F0087C611 /* Sources */,
+				77356F3B1574363F0087C611 /* Frameworks */,
+				77356F3C1574363F0087C611 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Minion;
+			productName = Minion;
+			productReference = 77356F3E1574363F0087C611 /* Minion.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		77356F351574363F0087C611 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ADL;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 77356F381574363F0087C611 /* Build configuration list for PBXProject "Minion" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 77356F331574363F0087C611;
+			productRefGroup = 77356F3F1574363F0087C611 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				77356F3D1574363F0087C611 /* Minion */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		77356F3C1574363F0087C611 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77356F4F1574363F0087C611 /* InfoPlist.strings in Resources */,
+				77356F611574363F0087C611 /* ADLMasterViewController.xib in Resources */,
+				77356F641574363F0087C611 /* ADLDetailViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		77356F3A1574363F0087C611 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77356F511574363F0087C611 /* main.m in Sources */,
+				77356F551574363F0087C611 /* ADLAppDelegate.m in Sources */,
+				77356F581574363F0087C611 /* Minion.xcdatamodeld in Sources */,
+				77356F5B1574363F0087C611 /* ADLMasterViewController.m in Sources */,
+				77356F5E1574363F0087C611 /* ADLDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		77356F4D1574363F0087C611 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77356F4E1574363F0087C611 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		77356F5F1574363F0087C611 /* ADLMasterViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77356F601574363F0087C611 /* en */,
+			);
+			name = ADLMasterViewController.xib;
+			sourceTree = "<group>";
+		};
+		77356F621574363F0087C611 /* ADLDetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77356F631574363F0087C611 /* en */,
+			);
+			name = ADLDetailViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		77356F651574363F0087C611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		77356F661574363F0087C611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		77356F681574363F0087C611 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Minion/Minion-Prefix.pch";
+				INFOPLIST_FILE = "Minion/Minion-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		77356F691574363F0087C611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Minion/Minion-Prefix.pch";
+				INFOPLIST_FILE = "Minion/Minion-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		77356F381574363F0087C611 /* Build configuration list for PBXProject "Minion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77356F651574363F0087C611 /* Debug */,
+				77356F661574363F0087C611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77356F671574363F0087C611 /* Build configuration list for PBXNativeTarget "Minion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77356F681574363F0087C611 /* Debug */,
+				77356F691574363F0087C611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		77356F561574363F0087C611 /* Minion.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				77356F571574363F0087C611 /* Minion.xcdatamodel */,
+			);
+			currentVersion = 77356F571574363F0087C611 /* Minion.xcdatamodel */;
+			path = Minion.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 77356F351574363F0087C611 /* Project object */;
+}
