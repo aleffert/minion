@@ -16,6 +16,8 @@
 @property (nonatomic) NSTimeInterval creationDate;
 @property (nonatomic, strong) ADLNotebook *owner;
 @property (nonatomic, strong) NSOrderedSet *rows;
+@property (nonatomic, strong) NSString* uuid;
+
 @end
 
 @interface ADLPage (CoreDataGeneratedAccessors)

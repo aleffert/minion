@@ -8,20 +8,31 @@
 
 #import "ADLNotebookViewController.h"
 
-#import "ADLPageViewController.h"
+#import "ADLNotebookLibrary.h"
+#import "ADLSwatchButton.h"
 
 @interface ADLNotebookViewController ()
 @property (strong, nonatomic) UIPopoverController* masterPopoverController;
 @property (strong, nonatomic) ADLPageViewController* currentPageController;
+
+@property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
+@property (strong, nonatomic) IBOutlet UIView* contentView;
+@property (strong, nonatomic) IBOutletCollection(ADLSwatchButton) NSArray* swatchButtons;
+
+@property (strong, nonatomic) UIColor* activeToolColor;
 
 - (void)configureView;
 @end
 
 @implementation ADLNotebookViewController
 
+@synthesize activeToolColor = _activeToolColor;
+@synthesize contentView = _contentView;
+@synthesize currentPageController = _currentPageController;
 @synthesize detailItem = _detailItem;
 @synthesize masterPopoverController = _masterPopoverController;
-@synthesize currentPageController = _currentPageController;
+@synthesize scrollView = _scrollView;
+@synthesize swatchButtons = _swatchButtons;
 
 #pragma mark - Managing the detail item
 
@@ -32,7 +43,10 @@
         _detailItem = newDetailItem;
         
         self.currentPageController = [[ADLPageViewController alloc] initWithPage:_detailItem];
+        self.currentPageController.delegate = self;
         [self addChildViewController:self.currentPageController];
+        
+        self.activeToolColor = [UIColor redColor];
         
         // Update the view.
         [self configureView];
@@ -54,13 +68,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    self.scrollView.contentSize = self.contentView.frame.size;
 }
 
 - (void)configureView {
     if(self.isViewLoaded) {
-        [self.view addSubview:self.currentPageController.view];
+        [self.contentView addSubview:self.currentPageController.view];
+        self.currentPageController.view.frame = self.contentView.bounds;
+        [self updateSwatchButtons];
+        NSArray* swatchColors = [[ADLNotebookLibrary sharedLibrary] swatchColors];
+        [self.swatchButtons enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL* stop) {
+            ADLSwatchButton* button = object;
+            button.color = [swatchColors objectAtIndex:index];
+        }];
     }
 }
 
@@ -76,6 +97,23 @@
         self.title = NSLocalizedString(@"Detail", @"Detail");
     }
     return self;
+}
+
+- (void)updateSwatchButtons {
+    for(ADLSwatchButton* button in self.swatchButtons) {
+        button.selected = [button.color isEqual:self.activeToolColor];
+    }
+}
+
+- (IBAction)takeColorFrom:(ADLSwatchButton*)sender {
+    self.activeToolColor = sender.color;
+    [self updateSwatchButtons];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [UIView animateWithDuration:duration animations:^{
+        self.contentView.center = CGPointMake(self.scrollView.center.x, self.contentView.center.y);
+    }];
 }
 							
 #pragma mark - Split view

@@ -17,10 +17,17 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext* mainContext;
 @property (readonly, strong, nonatomic) NSManagedObjectID* mainNotebookID;
 @property (readonly, strong, nonatomic) ADLNotebook* mainNotebook;
+@property (readonly, copy, nonatomic) NSArray* swatchColors;
+
+@property (readonly, nonatomic) NSURL* applicationDocumentsDirectory;
 
 - (void)commitChanges;
+
+- (void)performWithFreshContext:(void(^)(NSManagedObjectContext* objectContext))action;
 
 - (ADLPage*)freshPageInNotebook:(ADLNotebook*)notebook;
 - (NSFetchedResultsController*)fetchedPageResultsForNotebook:(ADLNotebook*)notebook;
 
 @end
+
+extern NSString* ADLPageChangedNotification;

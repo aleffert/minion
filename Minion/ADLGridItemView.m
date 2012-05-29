@@ -26,14 +26,18 @@ static CGFloat ADLGridItemSize = 40.;
     CGSize itemSize = [[self class] gridItemSize];
     if((self = [super initWithFrame:CGRectMake(0, 0, itemSize.width, itemSize.height)])) {
         self.item = item;
-        self.layer.borderColor = [UIColor colorWithWhite:.3 alpha:1.].CGColor;
+        self.layer.borderColor = [[self class] borderColor].CGColor;
         self.layer.borderWidth = 1;
         
         self.backgroundColor = item.color;
         
-        [self.item addObserver:self forKeyPath:@"color" options:0 context:NULL];
+        [self.item addObserver:self forKeyPath:@"color" options:0 context:(__bridge void*) self];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self.item removeObserver:self forKeyPath:@"color" context:(__bridge void*)self];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -44,6 +48,10 @@ static CGFloat ADLGridItemSize = 40.;
             } completion:nil];
         }
     }
+}
+
++ (UIColor*)borderColor {
+    return [UIColor colorWithWhite:.7 alpha:1.];
 }
 
 + (CGSize)gridItemSize {

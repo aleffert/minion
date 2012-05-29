@@ -16,6 +16,7 @@
 @dynamic creationDate;
 @dynamic owner;
 @dynamic rows;
+@dynamic uuid;
 
 - (void)addRowsObject:(ADLGridRow *)value {
     NSMutableOrderedSet* set = [self mutableOrderedSetValueForKey:@"rows"];

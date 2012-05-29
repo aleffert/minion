@@ -12,10 +12,11 @@
 
 @interface ADLGridItemView : UIView
 
++ (UIColor*)borderColor;
 + (CGSize)gridItemSize;
 
-@property (readonly, strong, nonatomic) ADLGridItem* item;
-
 - (ADLGridItemView*)initWithItem:(ADLGridItem*)item;
+
+@property (readonly, strong, nonatomic) ADLGridItem* item;
 
 @end

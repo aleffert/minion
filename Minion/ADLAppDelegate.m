@@ -9,8 +9,9 @@
 #import "ADLAppDelegate.h"
 
 #import "ADLNotebookLibrary.h"
-#import "ADLMasterViewController.h"
 #import "ADLNotebookViewController.h"
+#import "ADLPageThumbnailManager.h"
+#import "ADLPageThumbnailViewController.h"
 
 @interface ADLAppDelegate ()
 
@@ -28,9 +29,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
 
-    ADLMasterViewController *masterViewController = [[ADLMasterViewController alloc] initWithNibName:nil bundle:nil];
+    // This is sort of unfortunate. We should really be getting these metrics from somewhere
+    // TODO: Get them from somewhere
+    [[ADLPageThumbnailManager sharedManager] setBaseSize:CGSizeMake(586, 899)];
+    [[ADLPageThumbnailManager sharedManager] setThumbnailSize:CGSizeMake(300, 460)];
+
+    ADLPageThumbnailViewController *masterViewController = [[ADLPageThumbnailViewController alloc] initWithNibName:nil bundle:nil];
     masterViewController.notebook = [[ADLNotebookLibrary sharedLibrary] mainNotebook];
     UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
 
@@ -40,6 +45,7 @@
     masterViewController.detailViewController = detailViewController;
 
     self.splitViewController = [[UISplitViewController alloc] init];
+    self.splitViewController.presentsWithGesture = NO;
     self.splitViewController.delegate = detailViewController;
     self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
     self.window.rootViewController = self.splitViewController;

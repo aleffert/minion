@@ -13,7 +13,9 @@
 #import "ADLNotebook.h"
 #import "ADLPage.h"
 
-static NSUInteger ADLPageRows = 22;
+NSString* ADLPageChangedNotification = @"ADLPageChangedNotification";
+
+static NSUInteger ADLPageRows = 23;
 static NSUInteger ADLPageColumns = 15;
 static NSString* ADLNotebookMainNotebookIDKey = @"ADLNotebookMainNotebookIDKey";
 
@@ -55,6 +57,7 @@ static NSString* ADLNotebookMainNotebookIDKey = @"ADLNotebookMainNotebookIDKey";
         }
         self.mainContext = [[NSManagedObjectContext alloc] init];
         [self.mainContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainContextSaved:) name:NSManagedObjectContextDidSaveNotification object:self.mainContext];
     }
     return self;
 }
@@ -116,6 +119,12 @@ static NSString* ADLNotebookMainNotebookIDKey = @"ADLNotebookMainNotebookIDKey";
     return aFetchedResultsController;
 }
 
+- (NSString*)freshUUID {
+    CFUUIDRef uuid = CFUUIDCreate(NULL);
+    CFStringRef uuidString = CFUUIDCreateString(NULL, uuid);
+    return (__bridge_transfer NSString*)uuidString;
+}
+
 - (ADLPage*)freshPageInNotebook:(ADLNotebook *)notebook {
     ADLPage* page = [NSEntityDescription insertNewObjectForEntityForName:@"ADLPage" inManagedObjectContext:self.mainContext];
     page.creationDate = [NSDate timeIntervalSinceReferenceDate];
@@ -124,12 +133,51 @@ static NSString* ADLNotebookMainNotebookIDKey = @"ADLNotebookMainNotebookIDKey";
         [page addRowsObject:newRow];
         for(NSUInteger column = 0; column < ADLPageColumns; column++) {
             ADLGridItem* item = [NSEntityDescription insertNewObjectForEntityForName:@"ADLGridItem" inManagedObjectContext:self.mainContext];
+            item.color = [UIColor clearColor];
             [newRow addItemsObject:item];
         }
     }
+    page.uuid = [self freshUUID];
     
     [notebook addPagesObject:page];
     return page;
+}
+
+- (void)mainContextSaved:(NSNotification*)notification {
+    NSArray* changedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
+    NSMutableSet* changedPages = [[NSMutableSet alloc] init];
+    for(NSManagedObject* object in changedObjects) {
+        if([object isKindOfClass:[ADLPage class]]) {
+            [changedPages addObject:object];
+        }
+        else if([object isKindOfClass:[ADLGridItem class]]) {
+            ADLGridItem* item = (ADLGridItem*)object;
+            [changedPages addObject:item.row.page];
+        }
+    }
+    
+    for(ADLPage* page in changedPages) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ADLPageChangedNotification object:page];
+    }
+}
+
+- (void)performWithFreshContext:(void(^)(NSManagedObjectContext* objectContext))action {
+    NSManagedObjectContext* context = [[NSManagedObjectContext alloc] init];
+    context.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    action(context);
+}
+
+- (NSArray*)swatchColors {
+    return [NSArray arrayWithObjects:
+            [UIColor redColor],
+            [UIColor greenColor],
+            [UIColor blueColor],
+            [UIColor orangeColor],
+            [UIColor cyanColor],
+            [UIColor magentaColor],
+            [UIColor yellowColor],
+            [UIColor clearColor],
+            nil];
 }
 
 @end

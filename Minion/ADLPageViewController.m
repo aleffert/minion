@@ -12,6 +12,8 @@
 #import "ADLGridRow.h"
 #import "ADLGridItem.h"
 #import "ADLGridItemView.h"
+#import "ADLNotebookLibrary.h"
+#import "ADLPageThumbnailManager.h"
 
 @interface ADLPageViewController ()
 
@@ -22,6 +24,7 @@
 
 @implementation ADLPageViewController
 
+@synthesize delegate = _delegate;
 @synthesize itemViews = _itemViews;
 @synthesize page = _page;
 
@@ -40,8 +43,11 @@
 - (void)viewDidLoad {
     [self makeViews];
     
-    UIPanGestureRecognizer* applyGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.view addGestureRecognizer:applyGesture];
+    UIPanGestureRecognizer* dragApplyGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    [self.view addGestureRecognizer:dragApplyGesture];
+    
+    UITapGestureRecognizer* tapApplyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self.view addGestureRecognizer:tapApplyGesture];
 }
 
 - (void)viewDidUnload {
@@ -85,17 +91,30 @@
     return nil;
 }
 
-- (void)pan:(UIPanGestureRecognizer*)gesture {
+- (void)colorChangingGesture:(UIGestureRecognizer*)gesture {
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
-        case UIGestureRecognizerStateChanged: {
+        case UIGestureRecognizerStateChanged:
+        case UIGestureRecognizerStateEnded:
+        {
             ADLGridItemView* gridItem = [self gridItemViewAtPoint:[gesture locationInView:self.view]];
-            gridItem.item.color = [UIColor redColor];
+            gridItem.item.color = [self.delegate activeToolColor];
             break;
         }
         default:
             break;
     }
+    if(gesture.state == UIGestureRecognizerStateEnded) {
+        [[ADLNotebookLibrary sharedLibrary] commitChanges];
+    }
+}
+
+- (void)tap:(UITapGestureRecognizer*)gesture {
+    [self colorChangingGesture:gesture];
+}
+
+- (void)pan:(UIPanGestureRecognizer*)gesture {
+    [self colorChangingGesture:gesture];
 }
 
 @end

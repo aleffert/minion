@@ -1,5 +1,5 @@
 //
-//  ADLMasterViewController.h
+//  ADLPageThumbnailViewController.h
 //  Minion
 //
 //  Created by Akiva Leffert on 5/28/12.
@@ -13,7 +13,7 @@
 
 #import <CoreData/CoreData.h>
 
-@interface ADLMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface ADLPageThumbnailViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) ADLNotebookViewController *detailViewController;
 @property (strong, nonatomic) ADLNotebook* notebook;
