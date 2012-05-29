@@ -6,25 +6,33 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ADLDetailViewController.h"
+#import "ADLNotebookViewController.h"
 
-@interface ADLDetailViewController ()
-@property (strong, nonatomic) UIPopoverController *masterPopoverController;
+#import "ADLPageViewController.h"
+
+@interface ADLNotebookViewController ()
+@property (strong, nonatomic) UIPopoverController* masterPopoverController;
+@property (strong, nonatomic) ADLPageViewController* currentPageController;
+
 - (void)configureView;
 @end
 
-@implementation ADLDetailViewController
+@implementation ADLNotebookViewController
 
 @synthesize detailItem = _detailItem;
-@synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize currentPageController = _currentPageController;
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setDetailItem:(ADLPage*)newDetailItem
 {
     if (_detailItem != newDetailItem) {
+        [self removeCurrentPageController];
         _detailItem = newDetailItem;
+        
+        self.currentPageController = [[ADLPageViewController alloc] initWithPage:_detailItem];
+        [self addChildViewController:self.currentPageController];
         
         // Update the view.
         [self configureView];
@@ -32,16 +40,15 @@
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
+    }
+
 }
 
-- (void)configureView
-{
-    // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
+- (void)removeCurrentPageController {
+    if(self.currentPageController.isViewLoaded) {
+        [self.currentPageController.view removeFromSuperview];
     }
+    [self.currentPageController removeFromParentViewController];
 }
 
 - (void)viewDidLoad
@@ -51,11 +58,10 @@
     [self configureView];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    self.detailDescriptionLabel = nil;
+- (void)configureView {
+    if(self.isViewLoaded) {
+        [self.view addSubview:self.currentPageController.view];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

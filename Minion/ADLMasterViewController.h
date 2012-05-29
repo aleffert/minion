@@ -8,15 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class ADLDetailViewController;
+@class ADLNotebookViewController;
+@class ADLNotebook;
 
 #import <CoreData/CoreData.h>
 
 @interface ADLMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) ADLDetailViewController *detailViewController;
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) ADLNotebookViewController *detailViewController;
+@property (strong, nonatomic) ADLNotebook* notebook;
 
 @end

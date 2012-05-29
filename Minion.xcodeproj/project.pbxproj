@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770A3B2915744DC70055FDDA /* ADLPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A3B2715744DC70055FDDA /* ADLPageViewController.m */; };
+		770A3B2A15744DC70055FDDA /* ADLPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770A3B2815744DC70055FDDA /* ADLPageViewController.xib */; };
+		770A3B31157452C30055FDDA /* ADLGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 770A3B30157452C30055FDDA /* ADLGridItemView.m */; };
 		77356F431574363F0087C611 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F421574363F0087C611 /* UIKit.framework */; };
 		77356F451574363F0087C611 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F441574363F0087C611 /* Foundation.framework */; };
 		77356F471574363F0087C611 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77356F461574363F0087C611 /* CoreGraphics.framework */; };
@@ -16,30 +19,50 @@
 		77356F551574363F0087C611 /* ADLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F541574363F0087C611 /* ADLAppDelegate.m */; };
 		77356F581574363F0087C611 /* Minion.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77356F561574363F0087C611 /* Minion.xcdatamodeld */; };
 		77356F5B1574363F0087C611 /* ADLMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F5A1574363F0087C611 /* ADLMasterViewController.m */; };
-		77356F5E1574363F0087C611 /* ADLDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F5D1574363F0087C611 /* ADLDetailViewController.m */; };
+		77356F5E1574363F0087C611 /* ADLNotebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F5D1574363F0087C611 /* ADLNotebookViewController.m */; };
 		77356F611574363F0087C611 /* ADLMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77356F5F1574363F0087C611 /* ADLMasterViewController.xib */; };
-		77356F641574363F0087C611 /* ADLDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77356F621574363F0087C611 /* ADLDetailViewController.xib */; };
+		77356F641574363F0087C611 /* ADLNotebookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77356F621574363F0087C611 /* ADLNotebookViewController.xib */; };
+		77356F7D15743A100087C611 /* ADLGridRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F7C15743A100087C611 /* ADLGridRow.m */; };
+		77356F8015743A100087C611 /* ADLGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F7F15743A100087C611 /* ADLGridItem.m */; };
+		77356F8315743A100087C611 /* ADLPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F8215743A100087C611 /* ADLPage.m */; };
+		77356F8615743A100087C611 /* ADLNotebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F8515743A100087C611 /* ADLNotebook.m */; };
+		77356F8A15743A550087C611 /* ADLNotebookLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F8915743A550087C611 /* ADLNotebookLibrary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		770A3B2615744DC70055FDDA /* ADLPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLPageViewController.h; sourceTree = "<group>"; };
+		770A3B2715744DC70055FDDA /* ADLPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLPageViewController.m; sourceTree = "<group>"; };
+		770A3B2815744DC70055FDDA /* ADLPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADLPageViewController.xib; sourceTree = "<group>"; };
+		770A3B2F157452C30055FDDA /* ADLGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLGridItemView.h; sourceTree = "<group>"; };
+		770A3B30157452C30055FDDA /* ADLGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLGridItemView.m; sourceTree = "<group>"; };
 		77356F3E1574363F0087C611 /* Minion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77356F421574363F0087C611 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		77356F441574363F0087C611 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77356F461574363F0087C611 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		77356F481574363F0087C611 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		77356F4C1574363F0087C611 /* Minion-Info.plist */ = {isa = PBXFileReference; path = "Minion-Info.plist"; sourceTree = "<group>"; };
+		77356F4C1574363F0087C611 /* Minion-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Minion-Info.plist"; sourceTree = "<group>"; };
 		77356F4E1574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77356F501574363F0087C611 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		77356F521574363F0087C611 /* Minion-Prefix.pch */ = {isa = PBXFileReference; path = "Minion-Prefix.pch"; sourceTree = "<group>"; };
-		77356F531574363F0087C611 /* ADLAppDelegate.h */ = {isa = PBXFileReference; path = ADLAppDelegate.h; sourceTree = "<group>"; };
+		77356F521574363F0087C611 /* Minion-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Minion-Prefix.pch"; sourceTree = "<group>"; };
+		77356F531574363F0087C611 /* ADLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADLAppDelegate.h; sourceTree = "<group>"; };
 		77356F541574363F0087C611 /* ADLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLAppDelegate.m; sourceTree = "<group>"; };
 		77356F571574363F0087C611 /* Minion.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Minion.xcdatamodel; sourceTree = "<group>"; };
-		77356F591574363F0087C611 /* ADLMasterViewController.h */ = {isa = PBXFileReference; path = ADLMasterViewController.h; sourceTree = "<group>"; };
+		77356F591574363F0087C611 /* ADLMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADLMasterViewController.h; sourceTree = "<group>"; };
 		77356F5A1574363F0087C611 /* ADLMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLMasterViewController.m; sourceTree = "<group>"; };
-		77356F5C1574363F0087C611 /* ADLDetailViewController.h */ = {isa = PBXFileReference; path = ADLDetailViewController.h; sourceTree = "<group>"; };
-		77356F5D1574363F0087C611 /* ADLDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLDetailViewController.m; sourceTree = "<group>"; };
+		77356F5C1574363F0087C611 /* ADLNotebookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADLNotebookViewController.h; sourceTree = "<group>"; };
+		77356F5D1574363F0087C611 /* ADLNotebookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADLNotebookViewController.m; sourceTree = "<group>"; };
 		77356F601574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ADLMasterViewController.xib; sourceTree = "<group>"; };
-		77356F631574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ADLDetailViewController.xib; sourceTree = "<group>"; };
+		77356F631574363F0087C611 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ADLNotebookViewController.xib; sourceTree = "<group>"; };
+		77356F7B15743A100087C611 /* ADLGridRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLGridRow.h; path = Minion/ADLGridRow.h; sourceTree = "<group>"; };
+		77356F7C15743A100087C611 /* ADLGridRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLGridRow.m; path = Minion/ADLGridRow.m; sourceTree = "<group>"; };
+		77356F7E15743A100087C611 /* ADLGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLGridItem.h; path = Minion/ADLGridItem.h; sourceTree = "<group>"; };
+		77356F7F15743A100087C611 /* ADLGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLGridItem.m; path = Minion/ADLGridItem.m; sourceTree = "<group>"; };
+		77356F8115743A100087C611 /* ADLPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLPage.h; path = Minion/ADLPage.h; sourceTree = "<group>"; };
+		77356F8215743A100087C611 /* ADLPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLPage.m; path = Minion/ADLPage.m; sourceTree = "<group>"; };
+		77356F8415743A100087C611 /* ADLNotebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLNotebook.h; path = Minion/ADLNotebook.h; sourceTree = "<group>"; };
+		77356F8515743A100087C611 /* ADLNotebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLNotebook.m; path = Minion/ADLNotebook.m; sourceTree = "<group>"; };
+		77356F8815743A550087C611 /* ADLNotebookLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLNotebookLibrary.h; path = Minion/ADLNotebookLibrary.h; sourceTree = "<group>"; };
+		77356F8915743A550087C611 /* ADLNotebookLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLNotebookLibrary.m; path = Minion/ADLNotebookLibrary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		770A3B32157454080055FDDA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				770A3B2815744DC70055FDDA /* ADLPageViewController.xib */,
+				77356F5F1574363F0087C611 /* ADLMasterViewController.xib */,
+				77356F621574363F0087C611 /* ADLNotebookViewController.xib */,
+				77356F561574363F0087C611 /* Minion.xcdatamodeld */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		77356F331574363F0087C611 = {
 			isa = PBXGroup;
 			children = (
@@ -88,15 +122,18 @@
 		77356F4A1574363F0087C611 /* Minion */ = {
 			isa = PBXGroup;
 			children = (
+				77356F8715743A1C0087C611 /* Model */,
 				77356F531574363F0087C611 /* ADLAppDelegate.h */,
 				77356F541574363F0087C611 /* ADLAppDelegate.m */,
+				770A3B2F157452C30055FDDA /* ADLGridItemView.h */,
+				770A3B30157452C30055FDDA /* ADLGridItemView.m */,
+				770A3B2615744DC70055FDDA /* ADLPageViewController.h */,
+				770A3B2715744DC70055FDDA /* ADLPageViewController.m */,
 				77356F591574363F0087C611 /* ADLMasterViewController.h */,
 				77356F5A1574363F0087C611 /* ADLMasterViewController.m */,
-				77356F5C1574363F0087C611 /* ADLDetailViewController.h */,
-				77356F5D1574363F0087C611 /* ADLDetailViewController.m */,
-				77356F5F1574363F0087C611 /* ADLMasterViewController.xib */,
-				77356F621574363F0087C611 /* ADLDetailViewController.xib */,
-				77356F561574363F0087C611 /* Minion.xcdatamodeld */,
+				77356F5C1574363F0087C611 /* ADLNotebookViewController.h */,
+				77356F5D1574363F0087C611 /* ADLNotebookViewController.m */,
+				770A3B32157454080055FDDA /* Resources */,
 				77356F4B1574363F0087C611 /* Supporting Files */,
 			);
 			path = Minion;
@@ -111,6 +148,24 @@
 				77356F521574363F0087C611 /* Minion-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		77356F8715743A1C0087C611 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				77356F8815743A550087C611 /* ADLNotebookLibrary.h */,
+				77356F8915743A550087C611 /* ADLNotebookLibrary.m */,
+				77356F8415743A100087C611 /* ADLNotebook.h */,
+				77356F8515743A100087C611 /* ADLNotebook.m */,
+				77356F8115743A100087C611 /* ADLPage.h */,
+				77356F8215743A100087C611 /* ADLPage.m */,
+				77356F7E15743A100087C611 /* ADLGridItem.h */,
+				77356F7F15743A100087C611 /* ADLGridItem.m */,
+				77356F7B15743A100087C611 /* ADLGridRow.h */,
+				77356F7C15743A100087C611 /* ADLGridRow.m */,
+			);
+			name = Model;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +221,8 @@
 			files = (
 				77356F4F1574363F0087C611 /* InfoPlist.strings in Resources */,
 				77356F611574363F0087C611 /* ADLMasterViewController.xib in Resources */,
-				77356F641574363F0087C611 /* ADLDetailViewController.xib in Resources */,
+				77356F641574363F0087C611 /* ADLNotebookViewController.xib in Resources */,
+				770A3B2A15744DC70055FDDA /* ADLPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +237,14 @@
 				77356F551574363F0087C611 /* ADLAppDelegate.m in Sources */,
 				77356F581574363F0087C611 /* Minion.xcdatamodeld in Sources */,
 				77356F5B1574363F0087C611 /* ADLMasterViewController.m in Sources */,
-				77356F5E1574363F0087C611 /* ADLDetailViewController.m in Sources */,
+				77356F5E1574363F0087C611 /* ADLNotebookViewController.m in Sources */,
+				77356F7D15743A100087C611 /* ADLGridRow.m in Sources */,
+				77356F8015743A100087C611 /* ADLGridItem.m in Sources */,
+				77356F8315743A100087C611 /* ADLPage.m in Sources */,
+				77356F8615743A100087C611 /* ADLNotebook.m in Sources */,
+				77356F8A15743A550087C611 /* ADLNotebookLibrary.m in Sources */,
+				770A3B2915744DC70055FDDA /* ADLPageViewController.m in Sources */,
+				770A3B31157452C30055FDDA /* ADLGridItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,12 +267,12 @@
 			name = ADLMasterViewController.xib;
 			sourceTree = "<group>";
 		};
-		77356F621574363F0087C611 /* ADLDetailViewController.xib */ = {
+		77356F621574363F0087C611 /* ADLNotebookViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				77356F631574363F0087C611 /* en */,
 			);
-			name = ADLDetailViewController.xib;
+			name = ADLNotebookViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -303,6 +366,7 @@
 				77356F691574363F0087C611 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

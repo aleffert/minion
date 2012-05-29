@@ -1,13 +1,18 @@
 //
-//  ADLAppDelegate.h
+//  ADLGridItem.m
 //  Minion
 //
 //  Created by Akiva Leffert on 5/28/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ADLGridItem.h"
+#import "ADLGridRow.h"
 
-@interface ADLAppDelegate : UIResponder <UIApplicationDelegate>
+
+@implementation ADLGridItem
+
+@dynamic color;
+@dynamic row;
 
 @end

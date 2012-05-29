@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Event">
-        <attribute name="timeStamp" optional="YES" attributeType="Date"/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ADLGridItem" representedClassName="ADLGridItem" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="row" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLGridRow" inverseName="items" inverseEntity="ADLGridRow" syncable="YES"/>
+    </entity>
+    <entity name="ADLGridRow" representedClassName="ADLGridRow" syncable="YES">
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ADLGridItem" inverseName="row" inverseEntity="ADLGridItem" syncable="YES"/>
+        <relationship name="page" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLPage" inverseName="rows" inverseEntity="ADLPage" syncable="YES"/>
+    </entity>
+    <entity name="ADLNotebook" representedClassName="ADLNotebook" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ADLPage" inverseName="owner" inverseEntity="ADLPage" syncable="YES"/>
+    </entity>
+    <entity name="ADLPage" representedClassName="ADLPage" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLNotebook" inverseName="pages" inverseEntity="ADLNotebook" syncable="YES"/>
+        <relationship name="rows" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ADLGridRow" inverseName="page" inverseEntity="ADLGridRow" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="ADLGridRow" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ADLGridItem" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ADLPage" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ADLNotebook" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>
