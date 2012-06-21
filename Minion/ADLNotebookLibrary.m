@@ -8,6 +8,7 @@
 
 #import "ADLNotebookLibrary.h"
 
+#import "ADLConnectionLine.h"
 #import "ADLGridItem.h"
 #import "ADLGridRow.h"
 #import "ADLNotebook.h"
@@ -141,6 +142,15 @@ static NSString* ADLNotebookMainNotebookIDKey = @"ADLNotebookMainNotebookIDKey";
     
     [notebook addPagesObject:page];
     return page;
+}
+
+- (ADLConnectionLine*)addLineBetweenSource:(ADLGridItem*)source destination:(ADLGridItem*)destination {
+    ADLConnectionLine* line = [NSEntityDescription insertNewObjectForEntityForName:@"ADLConnectionLine" inManagedObjectContext:source.managedObjectContext];
+    NSAssert(source.row.page == destination.row.page, @"Adding a line between pages");
+    line.page = source.row.page;
+    line.source = source;
+    line.destination = destination;
+    return line;
 }
 
 - (void)mainContextSaved:(NSNotification*)notification {

@@ -10,6 +10,7 @@
 
 #import "ADLNotebookLibrary.h"
 #import "ADLSwatchButton.h"
+#import "ADLTool.h"
 
 @interface ADLNotebookViewController ()
 @property (strong, nonatomic) UIPopoverController* masterPopoverController;
@@ -19,14 +20,14 @@
 @property (strong, nonatomic) IBOutlet UIView* contentView;
 @property (strong, nonatomic) IBOutletCollection(ADLSwatchButton) NSArray* swatchButtons;
 
-@property (strong, nonatomic) UIColor* activeToolColor;
+@property (strong, nonatomic) ADLTool* activeTool;
 
 - (void)configureView;
 @end
 
 @implementation ADLNotebookViewController
 
-@synthesize activeToolColor = _activeToolColor;
+@synthesize activeTool = _activeTool;
 @synthesize contentView = _contentView;
 @synthesize currentPageController = _currentPageController;
 @synthesize detailItem = _detailItem;
@@ -46,7 +47,7 @@
         self.currentPageController.delegate = self;
         [self addChildViewController:self.currentPageController];
         
-        self.activeToolColor = [UIColor redColor];
+        self.activeTool = [ADLColorTool colorToolWithColor:[UIColor redColor]];
         
         // Update the view.
         [self configureView];
@@ -99,21 +100,35 @@
     return self;
 }
 
-- (void)updateSwatchButtons {
-    for(ADLSwatchButton* button in self.swatchButtons) {
-        button.selected = [button.color isEqual:self.activeToolColor];
-    }
-}
 
-- (IBAction)takeColorFrom:(ADLSwatchButton*)sender {
-    self.activeToolColor = sender.color;
-    [self updateSwatchButtons];
-}
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [UIView animateWithDuration:duration animations:^{
         self.contentView.center = CGPointMake(self.scrollView.center.x, self.contentView.center.y);
     }];
+}
+
+#pragma mark Tools
+
+- (void)updateSwatchButtons {
+    __block UIColor* activeToolColor = nil;
+    [self.activeTool caseLineTool:^(ADLLineTool* lineTool) {
+    } colorTool:^(ADLColorTool* colorTool) {
+        activeToolColor = colorTool.color;
+    }];
+    for(ADLSwatchButton* button in self.swatchButtons) {
+        button.selected = [button.color isEqual:activeToolColor];
+    }
+}
+
+- (IBAction)takeColorFrom:(ADLSwatchButton*)sender {
+    self.activeTool = [ADLColorTool colorToolWithColor:sender.color];
+    [self updateSwatchButtons];
+}
+
+- (IBAction)useLineTool:(id)sender {
+    self.activeTool = [ADLLineTool lineTool];
+    [self updateSwatchButtons];
 }
 							
 #pragma mark - Split view

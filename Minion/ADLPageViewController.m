@@ -8,24 +8,33 @@
 
 #import "ADLPageViewController.h"
 
-#import "ADLPage.h"
+#import "ADLConnectionLine.h"
+#import "ADLConnectionLineView.h"
 #import "ADLGridRow.h"
 #import "ADLGridItem.h"
 #import "ADLGridItemView.h"
 #import "ADLNotebookLibrary.h"
+#import "ADLPage.h"
 #import "ADLPageThumbnailManager.h"
+#import "ADLTool.h"
 
 @interface ADLPageViewController ()
 
 @property (strong, nonatomic) ADLPage* page;
 @property (strong, nonatomic) NSMutableDictionary* itemViews;
+@property (strong, nonatomic) NSMutableDictionary* lineViews;
+@property (strong, nonatomic) ADLGridItemView* dragStartItemView;
+@property (strong, nonatomic) CAShapeLayer* dragLineLayer;
 
 @end
 
 @implementation ADLPageViewController
 
 @synthesize delegate = _delegate;
-@synthesize itemViews = _itemViews;
+@synthesize dragLineLayer = _dragLineLayer;
+@synthesize dragStartItemView = _dragStartItemView;
+@synthesize lineViews = _lineViews;
+@synthesize itemViews = _itemViews;;
 @synthesize page = _page;
 
 - (id)initWithPage:(ADLPage*)page {
@@ -42,6 +51,7 @@
 
 - (void)viewDidLoad {
     [self makeViews];
+    [self makeLines];
     
     UIPanGestureRecognizer* dragApplyGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [self.view addGestureRecognizer:dragApplyGesture];
@@ -65,6 +75,19 @@
     }
     
     [self layoutItems];
+}
+
+- (void)makeLines {
+    self.lineViews = [[NSMutableDictionary alloc] init];
+    for(ADLConnectionLine* line in self.page.lines) {
+        [self addLine:line];
+    }
+}
+
+- (void)addLine:(ADLConnectionLine*)line {
+    ADLConnectionLineView* view = [[ADLConnectionLineView alloc] initWithFrame:self.view.bounds line:line delegate:self];
+    [self.view addSubview:view];
+    [self.lineViews setObject:view forKey:line.objectID];
 }
 
 - (void)layoutItems {
@@ -91,14 +114,19 @@
     return nil;
 }
 
-- (void)colorChangingGesture:(UIGestureRecognizer*)gesture {
+- (CGPoint)locationForItem:(ADLGridItem *)item relativeToLineView:(ADLConnectionLineView*)lineView {
+    ADLGridItemView* view = [self.itemViews objectForKey:item.objectID];
+    return [lineView convertPoint:view.center fromView:view.superview];
+}
+
+- (void)colorChangingGesture:(UIGestureRecognizer*)gesture tool:(ADLColorTool*)tool{
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged:
         case UIGestureRecognizerStateEnded:
         {
             ADLGridItemView* gridItem = [self gridItemViewAtPoint:[gesture locationInView:self.view]];
-            gridItem.item.color = [self.delegate activeToolColor];
+            gridItem.item.color = tool.color;
             break;
         }
         default:
@@ -109,12 +137,68 @@
     }
 }
 
+- (void)dragLineWithGesture:(UIGestureRecognizer*)gesture {
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan: {
+            self.dragStartItemView = [self gridItemViewAtPoint:[gesture locationInView:self.view]];
+            self.dragLineLayer = [CAShapeLayer layer];
+            self.dragLineLayer.frame = self.view.bounds;
+            self.dragLineLayer.lineWidth = 2;
+            self.dragLineLayer.lineDashPattern = [NSArray arrayWithObjects:
+                                                  [NSNumber numberWithFloat:4],
+                                                  [NSNumber numberWithFloat:4],
+                                                  nil];
+            self.dragLineLayer.strokeColor = [UIColor blackColor].CGColor;
+            [self.view.layer addSublayer:self.dragLineLayer];
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            CGPoint currentPoint = [gesture locationInView:self.view];
+            
+            ADLGridItemView* destView = [self gridItemViewAtPoint:[gesture locationInView:self.view]];
+            if(destView != nil) {
+                currentPoint = [self.view convertPoint:destView.center fromView:destView.superview];
+            }
+            
+            UIBezierPath* path = [UIBezierPath bezierPath];
+            CGPoint startPoint = [self.view convertPoint:self.dragStartItemView.center fromView:self.dragStartItemView.superview];
+            [path moveToPoint:startPoint];
+            [path addLineToPoint:currentPoint];
+            self.dragLineLayer.path = path.CGPath;
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            ADLGridItemView* destView = [self gridItemViewAtPoint:[gesture locationInView:self.view]];
+            if(destView != nil) {
+                ADLGridItem* srcItem = self.dragStartItemView.item;
+                ADLGridItem* dstItem = destView.item;
+                ADLConnectionLine* line = [[ADLNotebookLibrary sharedLibrary] addLineBetweenSource:srcItem destination:dstItem];
+                [self addLine:line];
+            }
+            [self.dragLineLayer removeFromSuperlayer];
+            self.dragLineLayer = nil;
+            [[ADLNotebookLibrary sharedLibrary] commitChanges];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 - (void)tap:(UITapGestureRecognizer*)gesture {
-    [self colorChangingGesture:gesture];
+    [self.delegate.activeTool caseLineTool:^(ADLLineTool* tool) {
+        // Do nothing
+    } colorTool:^(ADLColorTool* tool) {
+        [self colorChangingGesture:gesture tool:tool];
+    }];
 }
 
 - (void)pan:(UIPanGestureRecognizer*)gesture {
-    [self colorChangingGesture:gesture];
+    [self.delegate.activeTool caseLineTool:^(ADLLineTool* tool) {
+        [self dragLineWithGesture:gesture];
+    } colorTool:^(ADLColorTool* tool) {
+        [self colorChangingGesture:gesture tool:tool];
+    }];
 }
 
 @end

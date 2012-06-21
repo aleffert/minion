@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ADLConnectionLineView.h"
+
+@class ADLTool;
 @class ADLPage;
 @protocol ADLPageViewControllerDelegate;
 
-@interface ADLPageViewController : UIViewController
+@interface ADLPageViewController : UIViewController <ADLConnectionLineViewDelegate>
 
 - (id)initWithPage:(ADLPage*)page;
 
@@ -23,6 +26,6 @@
 
 @protocol ADLPageViewControllerDelegate <NSObject>
 
-@property (strong, readonly, nonatomic) UIColor* activeToolColor;
+@property (strong, readonly, nonatomic) ADLTool* activeTool;
 
 @end

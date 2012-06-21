@@ -8,6 +8,7 @@
 
 #import "ADLPageRenderingOperation.h"
 
+#import "ADLConnectionLine.h"
 #import "ADLGridItem.h"
 #import "ADLGridRow.h"
 #import "ADLGridItemView.h"
@@ -40,6 +41,17 @@
     return self;
 }
 
+- (CGRect)rectForCellAtX:(NSUInteger)x y:(NSUInteger)y {
+    CGSize itemSize = [ADLGridItemView gridItemSize];
+    CGFloat xCoord = itemSize.width * (x + 1) - x;
+    CGFloat yCoord = itemSize.height * (y + 1) - y;
+    return CGRectMake(xCoord, yCoord, itemSize.width, itemSize.height);
+}
+
+- (CGPoint)rectCenter:(CGRect)rect {
+    return CGPointMake(rect.origin.x + rect.size.width / 2, rect.origin.y + rect.size.height / 2);
+}
+
 - (void)main {
     [[ADLNotebookLibrary sharedLibrary] performWithFreshContext:^(NSManagedObjectContext* objectContext) {
         NSError* error = nil;
@@ -52,20 +64,33 @@
         CGContextScaleCTM(ctx, self.size.width / self.baseSize.width, self.size.height / self.baseSize.height);
         [[UIColor whiteColor] set];
         CGContextFillRect(ctx, CGRectMake(0, 0, self.baseSize.width, self.baseSize.height));
-        CGFloat accumulatedHeight = 0;
-        CGSize itemSize = [ADLGridItemView gridItemSize];
         UIColor* gridBorderColor = [ADLGridItemView borderColor];
-        for(ADLGridRow* row in page.rows) {
-            CGFloat accumulatedWidth = 0;
-            for(ADLGridItem* item in row.items) {
-                UIBezierPath* itemPath =  [UIBezierPath bezierPathWithRect:CGRectMake(accumulatedWidth, accumulatedHeight, itemSize.width, itemSize.height)];
+        [page.rows enumerateObjectsUsingBlock:^(id obj, NSUInteger y, BOOL* stop) {
+            ADLGridRow* row = obj;
+            [row.items enumerateObjectsUsingBlock:^(id obj2, NSUInteger x, BOOL* stop) {
+                ADLGridItem* item = obj2;
+                CGRect itemRect = [self rectForCellAtX:x y:y];
+                UIBezierPath* itemPath =  [UIBezierPath bezierPathWithRect:itemRect];
                 [item.color setFill];
                 [itemPath fill];
                 [gridBorderColor setStroke];
                 [itemPath stroke];
-                accumulatedWidth += itemSize.width - 1;
-            }
-            accumulatedHeight += itemSize.height - 1;
+            }];
+        }];
+        for(ADLConnectionLine* line in page.lines) {
+            NSUInteger srcX = [line.source.row.items indexOfObject: line.source];
+            NSUInteger srcY = [line.source.row.page.rows indexOfObject: line.source.row];
+            NSUInteger dstX = [line.destination.row.items indexOfObject: line.destination];
+            NSUInteger dstY = [line.destination.row.page.rows indexOfObject: line.destination.row];
+            CGRect srcRect = [self rectForCellAtX:srcX y:srcY];
+            CGRect dstRect = [self rectForCellAtX:dstX y:dstY];
+            CGPoint srcCenter = [self rectCenter:srcRect];
+            CGPoint dstCenter = [self rectCenter:dstRect];
+            UIBezierPath* linePath = [UIBezierPath bezierPath];
+            [linePath moveToPoint:srcCenter];
+            [linePath addLineToPoint:dstCenter];
+            [[UIColor blackColor] setStroke];
+            [linePath stroke];
         }
         
         self.resultImage = UIGraphicsGetImageFromCurrentImageContext();

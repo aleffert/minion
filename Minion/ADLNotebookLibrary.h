@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class ADLConnectionLine;
+@class ADLGridItem;
 @class ADLNotebook;
 @class ADLPage;
 
@@ -27,6 +29,8 @@
 
 - (ADLPage*)freshPageInNotebook:(ADLNotebook*)notebook;
 - (NSFetchedResultsController*)fetchedPageResultsForNotebook:(ADLNotebook*)notebook;
+
+- (ADLConnectionLine*)addLineBetweenSource:(ADLGridItem*)source destination:(ADLGridItem*)destination;
 
 @end
 

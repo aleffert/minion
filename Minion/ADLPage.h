@@ -14,6 +14,7 @@
 @interface ADLPage : NSManagedObject
 
 @property (nonatomic) NSTimeInterval creationDate;
+@property (nonatomic) NSOrderedSet* lines;
 @property (nonatomic, strong) ADLNotebook *owner;
 @property (nonatomic, strong) NSOrderedSet *rows;
 @property (nonatomic, strong) NSString* uuid;

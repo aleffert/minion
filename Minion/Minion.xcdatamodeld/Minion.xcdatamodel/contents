@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ADLConnectionLine" representedClassName="ADLConnectionLine" syncable="YES">
+        <relationship name="destination" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLGridItem" inverseName="lineDestinations" inverseEntity="ADLGridItem" syncable="YES"/>
+        <relationship name="page" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLPage" inverseName="lines" inverseEntity="ADLPage" syncable="YES"/>
+        <relationship name="source" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLGridItem" inverseName="lineSources" inverseEntity="ADLGridItem" syncable="YES"/>
+    </entity>
     <entity name="ADLGridItem" representedClassName="ADLGridItem" syncable="YES">
         <attribute name="color" attributeType="Transformable" syncable="YES"/>
+        <relationship name="lineDestinations" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLConnectionLine" inverseName="destination" inverseEntity="ADLConnectionLine" syncable="YES"/>
+        <relationship name="lineSources" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLConnectionLine" inverseName="source" inverseEntity="ADLConnectionLine" syncable="YES"/>
         <relationship name="row" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLGridRow" inverseName="items" inverseEntity="ADLGridRow" syncable="YES"/>
     </entity>
     <entity name="ADLGridRow" representedClassName="ADLGridRow" syncable="YES">
@@ -15,13 +22,15 @@
     <entity name="ADLPage" representedClassName="ADLPage" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lines" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ADLConnectionLine" inverseName="page" inverseEntity="ADLConnectionLine" syncable="YES"/>
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ADLNotebook" inverseName="pages" inverseEntity="ADLNotebook" syncable="YES"/>
         <relationship name="rows" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ADLGridRow" inverseName="page" inverseEntity="ADLGridRow" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ADLGridItem" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ADLConnectionLine" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="ADLGridItem" positionX="160" positionY="192" width="128" height="105"/>
         <element name="ADLGridRow" positionX="160" positionY="192" width="128" height="75"/>
         <element name="ADLNotebook" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="ADLPage" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="ADLPage" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>

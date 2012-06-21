@@ -13,6 +13,7 @@
 
 @implementation ADLPage
 
+@dynamic lines;
 @dynamic creationDate;
 @dynamic owner;
 @dynamic rows;

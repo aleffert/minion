@@ -13,6 +13,8 @@
 @implementation ADLGridItem
 
 @dynamic color;
+@dynamic lineDestinations;
+@dynamic lineSources;
 @dynamic row;
 
 @end

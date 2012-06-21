@@ -15,5 +15,7 @@
 
 @property (nonatomic, strong) UIColor* color;
 @property (nonatomic, strong) ADLGridRow *row;
+@property (nonatomic, retain) NSSet* lineDestinations;
+@property (nonatomic, retain) NSSet* lineSources;
 
 @end

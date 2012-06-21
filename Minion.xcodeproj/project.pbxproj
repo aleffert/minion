@@ -30,6 +30,9 @@
 		77356F8315743A100087C611 /* ADLPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F8215743A100087C611 /* ADLPage.m */; };
 		77356F8615743A100087C611 /* ADLNotebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F8515743A100087C611 /* ADLNotebook.m */; };
 		77356F8A15743A550087C611 /* ADLNotebookLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 77356F8915743A550087C611 /* ADLNotebookLibrary.m */; };
+		776321BD157F103F00947986 /* ADLConnectionLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 776321BC157F103F00947986 /* ADLConnectionLine.m */; };
+		776321C1157F159500947986 /* ADLTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 776321C0157F159500947986 /* ADLTool.m */; };
+		777516941592CC6000DF7526 /* ADLConnectionLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 777516931592CC6000DF7526 /* ADLConnectionLineView.m */; };
 		778CDFB91574820F0077C63C /* ADLPageRenderingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778CDFB81574820F0077C63C /* ADLPageRenderingOperation.m */; };
 		778CDFBC157488D90077C63C /* ADLPageThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 778CDFBB157488D90077C63C /* ADLPageThumbnailCell.m */; };
 /* End PBXBuildFile section */
@@ -73,6 +76,12 @@
 		77356F8515743A100087C611 /* ADLNotebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLNotebook.m; path = Minion/ADLNotebook.m; sourceTree = "<group>"; };
 		77356F8815743A550087C611 /* ADLNotebookLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLNotebookLibrary.h; path = Minion/ADLNotebookLibrary.h; sourceTree = "<group>"; };
 		77356F8915743A550087C611 /* ADLNotebookLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLNotebookLibrary.m; path = Minion/ADLNotebookLibrary.m; sourceTree = "<group>"; };
+		776321BB157F103F00947986 /* ADLConnectionLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADLConnectionLine.h; path = Minion/ADLConnectionLine.h; sourceTree = "<group>"; };
+		776321BC157F103F00947986 /* ADLConnectionLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADLConnectionLine.m; path = Minion/ADLConnectionLine.m; sourceTree = "<group>"; };
+		776321BF157F159500947986 /* ADLTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLTool.h; sourceTree = "<group>"; };
+		776321C0157F159500947986 /* ADLTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLTool.m; sourceTree = "<group>"; };
+		777516921592CC6000DF7526 /* ADLConnectionLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLConnectionLineView.h; sourceTree = "<group>"; };
+		777516931592CC6000DF7526 /* ADLConnectionLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLConnectionLineView.m; sourceTree = "<group>"; };
 		778CDFB71574820F0077C63C /* ADLPageRenderingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLPageRenderingOperation.h; sourceTree = "<group>"; };
 		778CDFB81574820F0077C63C /* ADLPageRenderingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLPageRenderingOperation.m; sourceTree = "<group>"; };
 		778CDFBA157488D90077C63C /* ADLPageThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLPageThumbnailCell.h; sourceTree = "<group>"; };
@@ -138,13 +147,15 @@
 		77356F4A1574363F0087C611 /* Minion */ = {
 			isa = PBXGroup;
 			children = (
-				778CDFBA157488D90077C63C /* ADLPageThumbnailCell.h */,
-				778CDFBB157488D90077C63C /* ADLPageThumbnailCell.m */,
 				77356F8715743A1C0087C611 /* Model */,
 				77356F531574363F0087C611 /* ADLAppDelegate.h */,
 				77356F541574363F0087C611 /* ADLAppDelegate.m */,
+				777516921592CC6000DF7526 /* ADLConnectionLineView.h */,
+				777516931592CC6000DF7526 /* ADLConnectionLineView.m */,
 				770A3B2F157452C30055FDDA /* ADLGridItemView.h */,
 				770A3B30157452C30055FDDA /* ADLGridItemView.m */,
+				778CDFBA157488D90077C63C /* ADLPageThumbnailCell.h */,
+				778CDFBB157488D90077C63C /* ADLPageThumbnailCell.m */,
 				770A3B3B15747F6E0055FDDA /* ADLPageThumbnailManager.h */,
 				770A3B3C15747F6E0055FDDA /* ADLPageThumbnailManager.m */,
 				770A3B2615744DC70055FDDA /* ADLPageViewController.h */,
@@ -155,6 +166,8 @@
 				77356F5A1574363F0087C611 /* ADLPageThumbnailViewController.m */,
 				770A3B3315745B1E0055FDDA /* ADLSwatchButton.h */,
 				770A3B3415745B1E0055FDDA /* ADLSwatchButton.m */,
+				776321BF157F159500947986 /* ADLTool.h */,
+				776321C0157F159500947986 /* ADLTool.m */,
 				77356F5C1574363F0087C611 /* ADLNotebookViewController.h */,
 				77356F5D1574363F0087C611 /* ADLNotebookViewController.m */,
 				770A3B32157454080055FDDA /* Resources */,
@@ -177,6 +190,8 @@
 		77356F8715743A1C0087C611 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				776321BB157F103F00947986 /* ADLConnectionLine.h */,
+				776321BC157F103F00947986 /* ADLConnectionLine.m */,
 				77356F8815743A550087C611 /* ADLNotebookLibrary.h */,
 				77356F8915743A550087C611 /* ADLNotebookLibrary.m */,
 				77356F8415743A100087C611 /* ADLNotebook.h */,
@@ -273,6 +288,9 @@
 				770A3B3D15747F6F0055FDDA /* ADLPageThumbnailManager.m in Sources */,
 				778CDFB91574820F0077C63C /* ADLPageRenderingOperation.m in Sources */,
 				778CDFBC157488D90077C63C /* ADLPageThumbnailCell.m in Sources */,
+				776321BD157F103F00947986 /* ADLConnectionLine.m in Sources */,
+				776321C1157F159500947986 /* ADLTool.m in Sources */,
+				777516941592CC6000DF7526 /* ADLConnectionLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
