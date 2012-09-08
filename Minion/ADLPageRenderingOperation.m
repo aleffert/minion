@@ -21,28 +21,25 @@
 @property (retain, nonatomic) NSManagedObjectID* pageID;
 @property (assign, nonatomic) CGSize size;
 @property (assign, nonatomic) CGSize baseSize;
+@property (assign, nonatomic) CGSize itemSize;
 @property (strong, nonatomic) UIImage* resultImage;
 
 @end
 
 @implementation ADLPageRenderingOperation
 
-@synthesize baseSize = _baseSize;
-@synthesize pageID = _pageID;
-@synthesize resultImage = _resultImage;
-@synthesize size = _size;
-
 - (ADLPageRenderingOperation*)initWithPage:(ADLPage*)page size:(CGSize)size baseSize:(CGSize)baseSize {
     if((self = [super init])) {
         self.pageID = page.objectID;
         self.size = size;
         self.baseSize = baseSize;
+        self.itemSize = [ADLGridItemView itemSizeForCanvasSize:self.baseSize gridWidth:page.gridWidth gridHeight:page.gridHeight];
     }
     return self;
 }
 
 - (CGRect)rectForCellAtX:(NSUInteger)x y:(NSUInteger)y {
-    CGSize itemSize = [ADLGridItemView gridItemSize];
+    CGSize itemSize = self.itemSize;
     CGFloat xCoord = itemSize.width * (x + 1) - x;
     CGFloat yCoord = itemSize.height * (y + 1) - y;
     return CGRectMake(xCoord, yCoord, itemSize.width, itemSize.height);

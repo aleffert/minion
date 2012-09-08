@@ -129,6 +129,8 @@ static NSString* ADLNotebookMainNotebookIDKey = @"ADLNotebookMainNotebookIDKey";
 - (ADLPage*)freshPageInNotebook:(ADLNotebook *)notebook {
     ADLPage* page = [NSEntityDescription insertNewObjectForEntityForName:@"ADLPage" inManagedObjectContext:self.mainContext];
     page.creationDate = [NSDate timeIntervalSinceReferenceDate];
+    page.gridWidth = ADLPageColumns;
+    page.gridHeight = ADLPageRows;
     for(NSUInteger row = 0; row < ADLPageRows; row++) {
         ADLGridRow* newRow = [NSEntityDescription insertNewObjectForEntityForName:@"ADLGridRow" inManagedObjectContext:self.mainContext];
         [page addRowsObject:newRow];

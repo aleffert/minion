@@ -35,6 +35,8 @@
 		777516941592CC6000DF7526 /* ADLConnectionLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 777516931592CC6000DF7526 /* ADLConnectionLineView.m */; };
 		778CDFB91574820F0077C63C /* ADLPageRenderingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778CDFB81574820F0077C63C /* ADLPageRenderingOperation.m */; };
 		778CDFBC157488D90077C63C /* ADLPageThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 778CDFBB157488D90077C63C /* ADLPageThumbnailCell.m */; };
+		77CFFF9A15FBBEA700C28A70 /* ADLAddPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CFFF9815FBBEA700C28A70 /* ADLAddPageViewController.m */; };
+		77CFFF9B15FBBEA700C28A70 /* ADLAddPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,9 @@
 		778CDFB81574820F0077C63C /* ADLPageRenderingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLPageRenderingOperation.m; sourceTree = "<group>"; };
 		778CDFBA157488D90077C63C /* ADLPageThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLPageThumbnailCell.h; sourceTree = "<group>"; };
 		778CDFBB157488D90077C63C /* ADLPageThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLPageThumbnailCell.m; sourceTree = "<group>"; };
+		77CFFF9715FBBEA700C28A70 /* ADLAddPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLAddPageViewController.h; sourceTree = "<group>"; };
+		77CFFF9815FBBEA700C28A70 /* ADLAddPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLAddPageViewController.m; sourceTree = "<group>"; };
+		77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADLAddPageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				77356F8715743A1C0087C611 /* Model */,
+				77CFFF9715FBBEA700C28A70 /* ADLAddPageViewController.h */,
+				77CFFF9815FBBEA700C28A70 /* ADLAddPageViewController.m */,
+				77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */,
 				77356F531574363F0087C611 /* ADLAppDelegate.h */,
 				77356F541574363F0087C611 /* ADLAppDelegate.m */,
 				777516921592CC6000DF7526 /* ADLConnectionLineView.h */,
@@ -262,6 +270,7 @@
 				77356F611574363F0087C611 /* ADLPageThumbnailViewController.xib in Resources */,
 				77356F641574363F0087C611 /* ADLNotebookViewController.xib in Resources */,
 				770A3B2A15744DC70055FDDA /* ADLPageViewController.xib in Resources */,
+				77CFFF9B15FBBEA700C28A70 /* ADLAddPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +300,7 @@
 				776321BD157F103F00947986 /* ADLConnectionLine.m in Sources */,
 				776321C1157F159500947986 /* ADLTool.m in Sources */,
 				777516941592CC6000DF7526 /* ADLConnectionLineView.m in Sources */,
+				77CFFF9A15FBBEA700C28A70 /* ADLAddPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,10 +13,12 @@
 
 @implementation ADLPage
 
-@dynamic lines;
 @dynamic creationDate;
-@dynamic owner;
+@dynamic gridHeight;
+@dynamic gridWidth;
+@dynamic lines;
 @dynamic rows;
+@dynamic owner;
 @dynamic uuid;
 
 - (void)addRowsObject:(ADLGridRow *)value {

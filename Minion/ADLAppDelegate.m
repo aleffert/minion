@@ -8,8 +8,11 @@
 
 #import "ADLAppDelegate.h"
 
+#import "ADLAddPageViewController.h"
+#import "ADLNotebook.h"
 #import "ADLNotebookLibrary.h"
 #import "ADLNotebookViewController.h"
+#import "ADLPage.h"
 #import "ADLPageThumbnailManager.h"
 #import "ADLPageThumbnailViewController.h"
 
@@ -34,21 +37,17 @@
     // TODO: Get them from somewhere
     [[ADLPageThumbnailManager sharedManager] setBaseSize:CGSizeMake(586, 899)];
     [[ADLPageThumbnailManager sharedManager] setThumbnailSize:CGSizeMake(300, 460)];
+    
+    UIPageViewController* pageViewController =
+    [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationDirectionForward options:@{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)}];
+    
+    pageViewController.delegate = self;
+    pageViewController.dataSource = self;
 
-    ADLPageThumbnailViewController *masterViewController = [[ADLPageThumbnailViewController alloc] initWithNibName:nil bundle:nil];
-    masterViewController.notebook = [[ADLNotebookLibrary sharedLibrary] mainNotebook];
-    UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-
-    ADLNotebookViewController *detailViewController = [[ADLNotebookViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-
-    masterViewController.detailViewController = detailViewController;
-
-    self.splitViewController = [[UISplitViewController alloc] init];
-    self.splitViewController.presentsWithGesture = NO;
-    self.splitViewController.delegate = detailViewController;
-    self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
-    self.window.rootViewController = self.splitViewController;
+    ADLPageViewController* initialViewController = [[ADLPageViewController alloc] initWithPage:[[[[ADLNotebookLibrary sharedLibrary] mainNotebook] pages] objectAtIndex:0]];
+    
+    [pageViewController setViewControllers:@[initialViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    self.window.rootViewController = pageViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -86,5 +85,90 @@
     [[ADLNotebookLibrary sharedLibrary] commitChanges];
 }
 
+
+#pragma mark Page Controller Delegate
+
+- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    if(UIInterfaceOrientationIsPortrait(orientation)) {
+        UIViewController *currentViewController = [pageViewController.viewControllers objectAtIndex:0];
+        NSArray *viewControllers = [NSArray arrayWithObject:currentViewController];
+        [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+        
+        pageViewController.doubleSided = NO;
+        
+        return UIPageViewControllerSpineLocationMin;
+    }
+    else {
+        NSArray *viewControllers = nil;
+        ADLPageViewController *viewController = [pageViewController.viewControllers objectAtIndex:0];
+        ADLPage* page = viewController.page;
+        NSUInteger currentIndex = [page.owner.pages indexOfObject:page];
+        
+        if(currentIndex %2 == 0)
+        {
+            UIViewController *nextViewController = [self pageViewController:pageViewController viewControllerAfterViewController:viewController];
+            if(nextViewController != nil) {
+                viewControllers = [NSArray arrayWithObjects:viewController, nextViewController, nil];
+            }
+            else {
+                ADLAddPageViewController* controller = [[ADLAddPageViewController alloc] init];
+                viewControllers = [NSArray arrayWithObjects:viewController, controller, nil];
+            }
+        }
+        else
+        {
+            UIViewController *previousViewController = [self pageViewController:pageViewController viewControllerBeforeViewController:viewController];
+            viewControllers = [NSArray arrayWithObjects:previousViewController, viewController, nil];
+        }
+        //Now, set the viewControllers property of UIPageViewController
+        [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+        
+        return UIPageViewControllerSpineLocationMid;
+    }
+}
+
+
+- (UIViewController*)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(ADLPageViewController *)viewController {
+    NSUInteger currentIndex = 1;
+    if(viewController != nil) {
+        if([viewController isKindOfClass:[ADLPageViewController class]]) {
+            ADLPage* page = viewController.page;
+            currentIndex = [page.owner.pages indexOfObject:page];
+        }
+        else {
+            currentIndex = [[[[ADLNotebookLibrary sharedLibrary] mainNotebook] pages] count];
+        }
+    }
+    if(currentIndex > 0) {
+        ADLPage* page = [[[[ADLNotebookLibrary sharedLibrary] mainNotebook] pages] objectAtIndex:currentIndex - 1];
+        ADLPageViewController* controller = [[ADLPageViewController alloc] initWithPage:page];
+        return controller;
+    }
+    else {
+        return nil;
+    }
+    
+}
+
+- (UIViewController*)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(ADLPageViewController *)viewController {
+    
+    if(![viewController isKindOfClass:[ADLPageViewController class]]) {
+        return nil;
+    }
+    
+    NSUInteger index = 0;
+    if(viewController != nil) {
+        ADLPage* page = viewController.page;
+        index = [page.owner.pages indexOfObject:page] + 1;
+    }
+    if(index < [[[[ADLNotebookLibrary sharedLibrary] mainNotebook] pages] count]) {
+        ADLPage* page = [[[[ADLNotebookLibrary sharedLibrary] mainNotebook] pages] objectAtIndex:index];
+        ADLPageViewController* controller = [[ADLPageViewController alloc] initWithPage:page];
+        return controller;
+    }
+    else {
+        return nil;
+    }
+}
 
 @end

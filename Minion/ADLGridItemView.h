@@ -13,9 +13,9 @@
 @interface ADLGridItemView : UIView
 
 + (UIColor*)borderColor;
-+ (CGSize)gridItemSize;
++ (CGSize)itemSizeForCanvasSize:(CGSize)size gridWidth:(CGFloat)gridWidth gridHeight:(CGFloat)gridHeight;
 
-- (ADLGridItemView*)initWithItem:(ADLGridItem*)item;
+- (ADLGridItemView*)initWithItem:(ADLGridItem *)item size:(CGSize)itemSize;
 
 @property (readonly, strong, nonatomic) ADLGridItem* item;
 

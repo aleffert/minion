@@ -15,6 +15,8 @@
 
 @property (nonatomic) NSTimeInterval creationDate;
 @property (nonatomic) NSOrderedSet* lines;
+@property (nonatomic, assign) float gridWidth;
+@property (nonatomic, assign) float gridHeight;
 @property (nonatomic, strong) ADLNotebook *owner;
 @property (nonatomic, strong) NSOrderedSet *rows;
 @property (nonatomic, strong) NSString* uuid;

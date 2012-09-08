@@ -10,8 +10,6 @@
 
 #import "ADLGridItem.h"
 
-static CGFloat ADLGridItemSize = 40.;
-
 @interface ADLGridItemView ()
 
 @property (strong, nonatomic) ADLGridItem* item;
@@ -22,8 +20,7 @@ static CGFloat ADLGridItemSize = 40.;
 
 @synthesize item = _item;
 
-- (ADLGridItemView*)initWithItem:(ADLGridItem *)item {
-    CGSize itemSize = [[self class] gridItemSize];
+- (ADLGridItemView*)initWithItem:(ADLGridItem *)item size:(CGSize)itemSize {
     if((self = [super initWithFrame:CGRectMake(0, 0, itemSize.width, itemSize.height)])) {
         self.item = item;
         self.layer.borderColor = [[self class] borderColor].CGColor;
@@ -54,8 +51,11 @@ static CGFloat ADLGridItemSize = 40.;
     return [UIColor colorWithWhite:.7 alpha:1.];
 }
 
-+ (CGSize)gridItemSize {
-    return CGSizeMake(ADLGridItemSize, ADLGridItemSize);
++ (CGSize)itemSizeForCanvasSize:(CGSize)canvasSize gridWidth:(CGFloat)gridWidth gridHeight:(CGFloat)gridHeight {
+    CGFloat width = floorf(canvasSize.width / gridWidth);
+    CGFloat height = floorf(canvasSize.height / gridHeight);
+    CGFloat size = fminf(width, height);
+    return CGSizeMake(size, size);
 }
 
 @end
