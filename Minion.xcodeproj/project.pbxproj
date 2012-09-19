@@ -37,6 +37,8 @@
 		778CDFBC157488D90077C63C /* ADLPageThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 778CDFBB157488D90077C63C /* ADLPageThumbnailCell.m */; };
 		77CFFF9A15FBBEA700C28A70 /* ADLAddPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CFFF9815FBBEA700C28A70 /* ADLAddPageViewController.m */; };
 		77CFFF9B15FBBEA700C28A70 /* ADLAddPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */; };
+		77D4F77915FC38CF00A58CA7 /* ADLEditorToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D4F77715FC38CF00A58CA7 /* ADLEditorToolsViewController.m */; };
+		77D4F77A15FC38CF00A58CA7 /* ADLEditorToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D4F77815FC38CF00A58CA7 /* ADLEditorToolsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,9 @@
 		77CFFF9715FBBEA700C28A70 /* ADLAddPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLAddPageViewController.h; sourceTree = "<group>"; };
 		77CFFF9815FBBEA700C28A70 /* ADLAddPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLAddPageViewController.m; sourceTree = "<group>"; };
 		77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADLAddPageViewController.xib; sourceTree = "<group>"; };
+		77D4F77615FC38CF00A58CA7 /* ADLEditorToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLEditorToolsViewController.h; sourceTree = "<group>"; };
+		77D4F77715FC38CF00A58CA7 /* ADLEditorToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLEditorToolsViewController.m; sourceTree = "<group>"; };
+		77D4F77815FC38CF00A58CA7 /* ADLEditorToolsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADLEditorToolsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +117,8 @@
 		770A3B32157454080055FDDA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77D4F77815FC38CF00A58CA7 /* ADLEditorToolsViewController.xib */,
+				77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */,
 				770A3B2815744DC70055FDDA /* ADLPageViewController.xib */,
 				77356F5F1574363F0087C611 /* ADLPageThumbnailViewController.xib */,
 				77356F621574363F0087C611 /* ADLNotebookViewController.xib */,
@@ -155,7 +162,8 @@
 				77356F8715743A1C0087C611 /* Model */,
 				77CFFF9715FBBEA700C28A70 /* ADLAddPageViewController.h */,
 				77CFFF9815FBBEA700C28A70 /* ADLAddPageViewController.m */,
-				77CFFF9915FBBEA700C28A70 /* ADLAddPageViewController.xib */,
+				77D4F77615FC38CF00A58CA7 /* ADLEditorToolsViewController.h */,
+				77D4F77715FC38CF00A58CA7 /* ADLEditorToolsViewController.m */,
 				77356F531574363F0087C611 /* ADLAppDelegate.h */,
 				77356F541574363F0087C611 /* ADLAppDelegate.m */,
 				777516921592CC6000DF7526 /* ADLConnectionLineView.h */,
@@ -271,6 +279,7 @@
 				77356F641574363F0087C611 /* ADLNotebookViewController.xib in Resources */,
 				770A3B2A15744DC70055FDDA /* ADLPageViewController.xib in Resources */,
 				77CFFF9B15FBBEA700C28A70 /* ADLAddPageViewController.xib in Resources */,
+				77D4F77A15FC38CF00A58CA7 /* ADLEditorToolsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +310,7 @@
 				776321C1157F159500947986 /* ADLTool.m in Sources */,
 				777516941592CC6000DF7526 /* ADLConnectionLineView.m in Sources */,
 				77CFFF9A15FBBEA700C28A70 /* ADLAddPageViewController.m in Sources */,
+				77D4F77915FC38CF00A58CA7 /* ADLEditorToolsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +398,7 @@
 				GCC_PREFIX_HEADER = "Minion/Minion-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Minion/Minion-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -400,6 +411,7 @@
 				GCC_PREFIX_HEADER = "Minion/Minion-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Minion/Minion-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

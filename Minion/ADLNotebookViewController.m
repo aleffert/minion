@@ -8,82 +8,39 @@
 
 #import "ADLNotebookViewController.h"
 
-#import "ADLNotebookLibrary.h"
-#import "ADLSwatchButton.h"
-#import "ADLTool.h"
+#import "ADLAddPageViewController.h"
+#import "ADLEditorToolsViewController.h"
+#import "ADLNotebook.h"
+#import "ADLPage.h"
+#import "ADLPageViewController.h"
 
 @interface ADLNotebookViewController ()
-@property (strong, nonatomic) UIPopoverController* masterPopoverController;
-@property (strong, nonatomic) ADLPageViewController* currentPageController;
 
-@property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
-@property (strong, nonatomic) IBOutlet UIView* contentView;
-@property (strong, nonatomic) IBOutletCollection(ADLSwatchButton) NSArray* swatchButtons;
+@property (strong, nonatomic) IBOutlet ADLEditorToolsViewController* toolsController;
+@property (strong, nonatomic) ADLNotebook* notebook;
+@property (strong, nonatomic) UIPageViewController* pageController;
 
-@property (strong, nonatomic) ADLTool* activeTool;
-
-- (void)configureView;
 @end
 
 @implementation ADLNotebookViewController
 
-@synthesize activeTool = _activeTool;
-@synthesize contentView = _contentView;
-@synthesize currentPageController = _currentPageController;
-@synthesize detailItem = _detailItem;
-@synthesize masterPopoverController = _masterPopoverController;
-@synthesize scrollView = _scrollView;
-@synthesize swatchButtons = _swatchButtons;
-
-#pragma mark - Managing the detail item
-
-- (void)setDetailItem:(ADLPage*)newDetailItem
-{
-    if (_detailItem != newDetailItem) {
-        [self removeCurrentPageController];
-        _detailItem = newDetailItem;
+- (id)initWithNotebook:(ADLNotebook*)notebook {
+    if((self = [super initWithNibName:nil bundle:nil])) {
+        self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationDirectionForward options:@{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)}];
         
-        self.currentPageController = [[ADLPageViewController alloc] initWithPage:_detailItem];
-        self.currentPageController.delegate = self;
-        [self addChildViewController:self.currentPageController];
+        self.notebook = notebook;
+        self.pageController.delegate = self;
+        self.pageController.dataSource = self;
         
-        self.activeTool = [ADLColorTool colorToolWithColor:[UIColor redColor]];
         
-        // Update the view.
-        [self configureView];
+        self.toolsController = [[ADLEditorToolsViewController alloc] initWithNibName:nil bundle:nil];
+        
+        ADLPageViewController* initialViewController = [self pageControllerForPage:self.notebook.pages[0]];
+        
+        [self.pageController setViewControllers:@[initialViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        [self addChildViewController:self.pageController];
     }
-
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }
-
-}
-
-- (void)removeCurrentPageController {
-    if(self.currentPageController.isViewLoaded) {
-        [self.currentPageController.view removeFromSuperview];
-    }
-    [self.currentPageController removeFromParentViewController];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self configureView];
-    self.scrollView.contentSize = self.contentView.frame.size;
-}
-
-- (void)configureView {
-    if(self.isViewLoaded) {
-        [self.contentView addSubview:self.currentPageController.view];
-        self.currentPageController.view.frame = self.contentView.bounds;
-        [self updateSwatchButtons];
-        NSArray* swatchColors = [[ADLNotebookLibrary sharedLibrary] swatchColors];
-        [self.swatchButtons enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL* stop) {
-            ADLSwatchButton* button = object;
-            button.color = [swatchColors objectAtIndex:index];
-        }];
-    }
+    return self;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -91,60 +48,106 @@
     return YES;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = NSLocalizedString(@"Detail", @"Detail");
+- (void)viewDidLoad {
+    [self.view addSubview:self.pageController.view];
+    self.pageController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.pageController.view.frame = self.view.bounds;
+    [self.view addSubview:self.toolsController.view];
+    
+    CGFloat toolsX = self.view.frame.size.width / 2;
+    CGFloat toolsY = self.view.frame.size.height - self.toolsController.view.frame.size.height / 2;
+    self.toolsController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+    self.toolsController.view.center = CGPointMake(toolsX, toolsY);
+}
+
+#pragma mark Page Controller Delegate
+
+- (ADLPageViewController*)pageControllerForPage:(ADLPage*)page {
+    
+    ADLPageViewController* controller = [[ADLPageViewController alloc] initWithPage:page];
+    controller.delegate = self.toolsController;
+    return controller;
+}
+
+- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    if(UIInterfaceOrientationIsPortrait(orientation)) {
+        UIViewController *currentViewController = [pageViewController.viewControllers objectAtIndex:0];
+        NSArray *viewControllers = [NSArray arrayWithObject:currentViewController];
+        [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+        
+        pageViewController.doubleSided = NO;
+        
+        return UIPageViewControllerSpineLocationMin;
     }
-    return self;
-}
-
-
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [UIView animateWithDuration:duration animations:^{
-        self.contentView.center = CGPointMake(self.scrollView.center.x, self.contentView.center.y);
-    }];
-}
-
-#pragma mark Tools
-
-- (void)updateSwatchButtons {
-    __block UIColor* activeToolColor = nil;
-    [self.activeTool caseLineTool:^(ADLLineTool* lineTool) {
-    } colorTool:^(ADLColorTool* colorTool) {
-        activeToolColor = colorTool.color;
-    }];
-    for(ADLSwatchButton* button in self.swatchButtons) {
-        button.selected = [button.color isEqual:activeToolColor];
+    else {
+        NSArray *viewControllers = nil;
+        ADLPageViewController *viewController = [pageViewController.viewControllers objectAtIndex:0];
+        ADLPage* page = viewController.page;
+        NSUInteger currentIndex = [page.owner.pages indexOfObject:page];
+        
+        if(currentIndex %2 == 0)
+        {
+            UIViewController *nextViewController = [self pageViewController:pageViewController viewControllerAfterViewController:viewController];
+            if(nextViewController != nil) {
+                viewControllers = [NSArray arrayWithObjects:viewController, nextViewController, nil];
+            }
+            else {
+                ADLAddPageViewController* controller = [[ADLAddPageViewController alloc] init];
+                viewControllers = [NSArray arrayWithObjects:viewController, controller, nil];
+            }
+        }
+        else
+        {
+            UIViewController *previousViewController = [self pageViewController:pageViewController viewControllerBeforeViewController:viewController];
+            viewControllers = [NSArray arrayWithObjects:previousViewController, viewController, nil];
+        }
+        //Now, set the viewControllers property of UIPageViewController
+        [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+        
+        return UIPageViewControllerSpineLocationMid;
     }
 }
 
-- (IBAction)takeColorFrom:(ADLSwatchButton*)sender {
-    self.activeTool = [ADLColorTool colorToolWithColor:sender.color];
-    [self updateSwatchButtons];
+
+- (UIViewController*)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(ADLPageViewController *)viewController {
+    NSUInteger currentIndex = 1;
+    if(viewController != nil) {
+        if([viewController isKindOfClass:[ADLPageViewController class]]) {
+            ADLPage* page = viewController.page;
+            currentIndex = [page.owner.pages indexOfObject:page];
+        }
+        else {
+            currentIndex = self.notebook.pages.count;
+        }
+    }
+    if(currentIndex > 0) {
+        ADLPage* page = [self.notebook.pages objectAtIndex:currentIndex - 1];
+        return [self pageControllerForPage:page];
+    }
+    else {
+        return nil;
+    }
+    
 }
 
-- (IBAction)useLineTool:(id)sender {
-    self.activeTool = [ADLLineTool lineTool];
-    [self updateSwatchButtons];
-}
-							
-#pragma mark - Split view
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    self.masterPopoverController = popoverController;
-}
-
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    self.masterPopoverController = nil;
+- (UIViewController*)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(ADLPageViewController *)viewController {
+    
+    if(![viewController isKindOfClass:[ADLPageViewController class]]) {
+        return nil;
+    }
+    
+    NSUInteger index = 0;
+    if(viewController != nil) {
+        ADLPage* page = viewController.page;
+        index = [page.owner.pages indexOfObject:page] + 1;
+    }
+    if(index < self.notebook.pages.count) {
+        ADLPage* page = [self.notebook.pages objectAtIndex:index];
+        return [self pageControllerForPage:page];
+    }
+    else {
+        return nil;
+    }
 }
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ADLAppDelegate : UIResponder <UIApplicationDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface ADLAppDelegate : UIResponder <UIApplicationDelegate>
 
 @end

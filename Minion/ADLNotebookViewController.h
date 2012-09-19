@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ADLPageViewController.h"
+@class ADLNotebook;
 
-@class ADLPage;
+@interface ADLNotebookViewController : UIViewController < UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
-@interface ADLNotebookViewController : UIViewController <UISplitViewControllerDelegate, ADLPageViewControllerDelegate>
-
-@property (strong, nonatomic) ADLPage* detailItem;
+- (id)initWithNotebook:(ADLNotebook*)notebook;
 
 @end

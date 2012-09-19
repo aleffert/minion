@@ -41,15 +41,19 @@
 }
 
 - (void)layoutSubviews {
-    self.pathLayer.frame = self.bounds;
+    [self updateLocation];
 }
 
 - (void)didMoveToSuperview {
+    [self updateLocation];
+}
+
+- (void)updateLocation {
+    self.pathLayer.frame = self.bounds;
     UIBezierPath* path = [UIBezierPath bezierPath];
     [path moveToPoint:[self.delegate locationForItem:self.line.source relativeToLineView:self]];
     [path addLineToPoint:[self.delegate locationForItem:self.line.destination relativeToLineView:self]];
     self.pathLayer.path = path.CGPath;
-    
 }
 
 @end

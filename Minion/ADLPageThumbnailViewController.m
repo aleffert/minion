@@ -119,8 +119,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ADLPage *object = (ADLPage*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
-    self.detailViewController.detailItem = object;
+//    ADLPage *object = (ADLPage*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+//    self.detailViewController.detailItem = object;
 }
 
 #pragma mark - Fetched results controller

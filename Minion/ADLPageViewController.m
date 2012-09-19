@@ -13,6 +13,7 @@
 #import "ADLGridRow.h"
 #import "ADLGridItem.h"
 #import "ADLGridItemView.h"
+#import "ADLEditorToolsViewController.h"
 #import "ADLNotebookLibrary.h"
 #import "ADLPage.h"
 #import "ADLPageThumbnailManager.h"
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) NSMutableDictionary* lineViews;
 @property (strong, nonatomic) ADLGridItemView* dragStartItemView;
 @property (strong, nonatomic) CAShapeLayer* dragLineLayer;
+@property (strong, nonatomic) ADLEditorToolsViewController* toolsController;
 
 @end
 
@@ -46,8 +48,9 @@
     [self makeViews];
     [self makeLines];
     
-//    UIPanGestureRecognizer* dragApplyGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-//    [self.view addGestureRecognizer:dragApplyGesture];
+    UIPanGestureRecognizer* dragApplyGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    dragApplyGesture.delegate = self;
+    [self.view addGestureRecognizer:dragApplyGesture];
     
     UITapGestureRecognizer* tapApplyGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tapApplyGesture];
@@ -57,12 +60,12 @@
     self.itemViews = nil;
 }
 
-- (CGRect)contentRect {
+- (CGRect)idealContentRect {
     return UIEdgeInsetsInsetRect(self.view.bounds, UIEdgeInsetsMake(10, 10, 60, 10));
 }
 
 - (CGSize)currentGridItemSize {
-    return [ADLGridItemView itemSizeForCanvasSize:self.contentRect.size gridWidth:self.page.gridWidth gridHeight:self.page.gridHeight];
+    return [ADLGridItemView itemSizeForCanvasSize:self.idealContentRect.size gridWidth:self.page.gridWidth gridHeight:self.page.gridHeight];
 }
 
 - (void)makeViews {
@@ -101,10 +104,20 @@
     CGFloat totalWidth = itemSize.width * self.page.gridWidth - self.page.gridWidth - 1;
     CGFloat totalHeight = itemSize.height * self.page.gridHeight - self.page.gridHeight - 1;
     
-    CGRect contentRect = self.contentRect;
+    CGRect contentRect = self.idealContentRect;
     CGFloat x = contentRect.origin.x + (contentRect.size.width - totalWidth) / 2;
     CGFloat y = contentRect.origin.y + (contentRect.size.height - totalHeight) / 2;
     return CGPointMake(x, y);
+}
+
+- (CGSize)contentSize {
+    CGSize itemSize = self.currentGridItemSize;
+    return CGSizeMake(itemSize.width * self.page.gridWidth, itemSize.height * self.page.gridHeight);
+}
+
+- (CGRect)contentRect {
+    CGRect result = {.origin = [self contentStartPoint], .size = [self contentSize]};
+    return result;
 }
 
 - (void)layoutItems {
@@ -121,6 +134,10 @@
             accumulatedWidth += itemSize.width - 1;
         }
         accumulatedHeight += itemSize.height - 1;
+    }
+    for(ADLConnectionLine* line in self.page.lines) {
+        ADLConnectionLineView* view = self.lineViews[line.objectID];
+        view.frame = self.view.bounds;
     }
 }
 
@@ -202,6 +219,11 @@
         default:
             break;
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    CGPoint location = [touch locationInView:self.view];
+    return CGRectContainsPoint(self.contentRect, location);
 }
 
 - (void)tap:(UITapGestureRecognizer*)gesture {

@@ -14,7 +14,7 @@
 @class ADLPage;
 @protocol ADLPageViewControllerDelegate;
 
-@interface ADLPageViewController : UIViewController <ADLConnectionLineViewDelegate>
+@interface ADLPageViewController : UIViewController <ADLConnectionLineViewDelegate, UIGestureRecognizerDelegate>
 
 - (id)initWithPage:(ADLPage*)page;
 

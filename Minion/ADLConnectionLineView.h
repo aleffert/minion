@@ -17,6 +17,7 @@
 - (id)initWithFrame:(CGRect)frame line:(ADLConnectionLine*)line delegate:(id <ADLConnectionLineViewDelegate>)delegate;
 
 @property (readonly, assign, nonatomic) id <ADLConnectionLineViewDelegate> delegate;
+- (void)updateLocation;
 
 @end
 
